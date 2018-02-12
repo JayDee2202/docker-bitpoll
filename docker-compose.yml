@@ -1,0 +1,23 @@
+version: '2'
+services:
+    dudelPostgres:
+      image: postgres:9.6-alpine
+      restart: always
+      container_name: bitpoll-db
+      environment:
+        - POSTGRES_USER=bitpoll
+        - POSTGRES_PASSWORD=bitpollpass
+        - POSTGRES_DB=bitpoll
+      volumes:
+        - /data/bitpoll/db/:/var/lib/postgresql/data
+    dudel:
+        container_name: bitpoll-app
+        build: ./bitpoll
+        volumes:
+            - ./settings_local.py:/bitpoll/bitpoll/settings_local.py
+            - ./wsgi.py:/bitpoll/bitpoll/wsgi.py
+        ports:
+            - 8000:8888
+        links:
+            - dudelPostgres:dudelPostgres
+        restart: unless-stopped

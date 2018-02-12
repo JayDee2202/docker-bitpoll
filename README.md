@@ -1,24 +1,8 @@
-Docker image for [Bitpoll](https://github.com/fsinfuhh/Bitpoll)
+# Docker Bitpoll
 
-Download [settings_local.py](https://raw.githubusercontent.com/fsinfuhh/Bitpoll/master/bitpoll/settings_local.sample.py) and adjust the settings.
+Docker image for [Bitpoll](https://github.com/fsinfuhh/Bitpoll), prepared for use with a postgres database and behind a reverse proxy.
 
-```yaml
-version: '2'
-services:
-    dudel:
-        container_name: bitpoll
-        image: rankenstein/bitpoll
-        volumes:
-            - ./settings_local.py:/bitpoll/bitpoll/settings_local.py
-        ports:
-            - 80:8888
-        restart: unless-stopped
-```
+Adjust the settings within the `docker-compose.yml` and `settings_local.py` file before the first run.
+Within the docker-compose-file a volume for the database is predefined, you can also delete the mountpoint if you want.
 
-You might want to run a postgres database image and configure the connection in config.py.
-
-On the first run, initialise the database by running (this will delete existing data!):
-
-```bash
-docker-compose run dudel ./manage.py migrate
-```
+Supplemented with DjangoWhiteNoise for usage without debug mode but with proxy.

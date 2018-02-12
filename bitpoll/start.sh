@@ -1,6 +1,7 @@
 #!/bin/sh
 cd /bitpoll
 
+./manage.py migrate
 ./manage.py compilemessages
 rm -rf _static && ./manage.py collectstatic
 chmod a+w _static/scss/*.css

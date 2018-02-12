@@ -11,6 +11,7 @@ RUN apk --no-cache add --virtual .build-dependencies alpine-sdk gcc g++ git pyth
     git clone --depth=1 https://github.com/fsinfuhh/Bitpoll.git /bitpoll && \
     cd /bitpoll && \
     pip install -r requirements-production.txt && \
+    pip install WhiteNoise && \
     pip install mysqlclient && \
     apk --no-cache del .build-dependencies
 
